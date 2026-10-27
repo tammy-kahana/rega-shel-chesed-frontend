@@ -1,4 +1,4 @@
-import type { Task, TaskFilterValues } from "../types/task"
+import type { Task, TaskAction, TaskFilterValues } from "../types/task"
 import { api } from "./api"
 
 export const getTasks = async (filters: TaskFilterValues) => {
@@ -18,4 +18,12 @@ export const getTasks = async (filters: TaskFilterValues) => {
 export const getTask = async (id: string) => {
     const res = await api.get<Task>(`/tasks/${id}`);
     return res.data;
+}
+export const runTaskAction = async (id: string, action: TaskAction) => {
+    const url = `/tasks/${id}/${action}`;
+    if (action === "complete") {
+        await api.patch(url);
+    } else {
+        await api.post(url);
+    }
 }

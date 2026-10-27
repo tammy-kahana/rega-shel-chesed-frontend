@@ -2,7 +2,7 @@ export type TaskType = "ESCORT_PATIENT" | "FOOD_BASKETS" | "ELDERLY_HELP" | "TRA
 export type Area = "BNEI_BRAK" | "JERUSALEM" | "BEIT_SHEMESH" | "ELAD" | "MODIIN_ILLIT" | "BEITAR_ILLIT";
 export type TaskStatus = "OPEN" | "TAKEN" | "DONE";
 export type SignUpStatus = "ACTIVE" | "CANCELLED";
-
+export type TaskAction = "join" | "cancel" | "report-done" | "complete";
 interface TaskActions {
     canEdit: boolean;
     canComplete: boolean;
