@@ -1,3 +1,4 @@
+import type { TaskFormValues } from "../schemas/taskSchema";
 import type { Task, TaskAction, TaskFilterValues } from "../types/task"
 import { api } from "./api"
 
@@ -26,4 +27,12 @@ export const runTaskAction = async (id: string, action: TaskAction) => {
     } else {
         await api.post(url);
     }
+}
+export const createTask = async (values: TaskFormValues) => {
+    const res = await api.post<Task>("/tasks", values);
+    return res.data;
+}
+export const updateTask = async (id: string, values: TaskFormValues) => {
+    const res = await api.put<Task>(`/tasks/${id}`, values);
+    return res.data;
 }

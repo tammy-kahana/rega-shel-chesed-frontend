@@ -20,8 +20,8 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/tasks" element={<ProtectedRoute><TasksPage /></ProtectedRoute>} />
         <Route path="/tasks/:id" element={<ProtectedRoute><TaskDetailsPage /></ProtectedRoute>} />
-        <Route path="/tasks/new" element={<ProtectedRoute role="COORDINATOR"><TaskFormPage /></ProtectedRoute>} />
-        <Route path="/tasks/:id/edit" element={<ProtectedRoute role="COORDINATOR"><TaskFormPage /></ProtectedRoute>} />
+        <Route path="/tasks/new" element={<ProtectedRoute role="COORDINATOR"><TaskFormPage key="new"/></ProtectedRoute>} />
+        <Route path="/tasks/:id/edit" element={<ProtectedRoute role="COORDINATOR"><TaskFormPage key="edit"/></ProtectedRoute>} />
         <Route path="/volunteers" element={<ProtectedRoute role="COORDINATOR"><VolunteersPage /></ProtectedRoute>} />
         <Route path="/" element={<Navigate to="/tasks" replace />} />
         <Route path="*" element={<NotFoundPage />} />
