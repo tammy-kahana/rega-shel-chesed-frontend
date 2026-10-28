@@ -35,7 +35,21 @@ function TaskDetailsPage() {
         {data.actions.canCancel && <button onClick={() => mutation.mutate('cancel')} disabled={mutation.isPending}>ביטול הצטרפות</button>}
         {data.actions.canReportDone && <button onClick={() => mutation.mutate('report-done')} disabled={mutation.isPending}>ביצעתי</button>}
         {data.actions.canComplete && <button onClick={() => mutation.mutate('complete')} disabled={mutation.isPending}>סמן כבוצעה</button>}
-        {mutation.isError&&<p>{getErrorMessage(mutation.error)}</p>}
+        {mutation.isError && <p>{getErrorMessage(mutation.error)}</p>}
+        {data.signups && data.signups.length > 0 && (
+          <>
+            <h3>מתנדבים במשימה</h3>
+            <ul>
+              {data.signups.map(signup => (
+                <li key={signup.id}>
+                  {signup.volunteer.fullName}, {signup.volunteer.phone}, {signup.statusLabel}
+                  {signup.reportedDone && ". דיווח/ה שביצע/ה ✓"}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+        {data.signups && data.signups.length === 0 && <p>עוד לא הצטרפו מתנדבים</p>}
         <Link to="/tasks">חזרה לרשימה</Link>
       </div>
     </>
