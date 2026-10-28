@@ -1,11 +1,15 @@
-import { Link, useParams } from "react-router-dom"
+import { Link, useLocation, useParams } from "react-router-dom"
 import { getTask, runTaskAction } from "../api/tasks";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getErrorMessage } from "../api/getErrorMessage";
 import type { TaskAction } from "../types/task";
+import { formatDate } from "../utils/formatDate";
 
 function TaskDetailsPage() {
   const { id } = useParams();
+  const location = useLocation();
+  // הודעה שנשלחה מטופס המשימה אחרי שמירה (אם הגענו מהרשימה - אין הודעה)
+  const successMessage = (location.state as { message?: string } | null)?.message;
   const { data, isLoading, isError, error } = useQuery({ queryKey: ['tasks', id], queryFn: () => getTask(id!) })
   const queryClient = useQueryClient();
   const mutation = useMutation({ mutationFn: (action: TaskAction) => runTaskAction(id!, action), onSuccess: () => queryClient.invalidateQueries({ queryKey: ['tasks'] }) })
@@ -20,12 +24,13 @@ function TaskDetailsPage() {
   }
   return (
     <div className="mx-auto max-w-3xl border border-gray-200 bg-white p-8">
+      {successMessage && <p className="mb-4 border-s-4 border-green-600 bg-green-50 p-3 text-green-800">{successMessage}</p>}
       <h2>{data.title}</h2>
       <p className="mb-6 leading-relaxed text-gray-700">{data.description}</p>
       <div className="space-y-3">
         <p>סוג משימה: {data.typeLabel}</p>
         <p>אזור: {data.areaLabel}</p>
-        <p>מועד: {data.date}, {data.time}</p>
+        <p>מועד: {formatDate(data.date)}, {data.time}</p>
         <p>מתנדבים: {data.joinedCount}/{data.volunteersNeeded}</p>
         <p>סטטוס: {data.statusLabel}</p>
         <p>רכז/ת: {data.createdBy.fullName}</p>

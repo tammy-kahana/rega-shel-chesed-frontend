@@ -2,13 +2,32 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { getTasks } from "../api/tasks"
 import { getErrorMessage } from "../api/getErrorMessage"
 import TaskCard from "../components/TaskCard"
-import { useState } from "react"
+import { useSearchParams } from "react-router-dom"
 import type { TaskFilterValues } from "../types/task"
 import TaskFilters from "../components/TaskFilters"
 import { useAuth } from "../hooks/useAuth"
 
 function TasksPage() {
-  const [filters, setFilters] = useState<TaskFilterValues>({ search: "", area: "", type: "", status: "", sort: "date_asc", mine: false })
+  // הסינון נשמר בכתובת (למשל /tasks?area=ELAD), ולכן הוא נשאר גם בחזרה מדף משימה וגם ברענון
+  const [searchParams, setSearchParams] = useSearchParams();
+  const filters: TaskFilterValues = {
+    search: searchParams.get('search') ?? '',
+    area: searchParams.get('area') ?? '',
+    type: searchParams.get('type') ?? '',
+    status: searchParams.get('status') ?? '',
+    sort: searchParams.get('sort') ?? 'date_asc',
+    mine: searchParams.get('mine') === 'true',
+  };
+  const setFilters = (newFilters: TaskFilterValues) => {
+    const params = new URLSearchParams();
+    if (newFilters.search) params.set('search', newFilters.search);
+    if (newFilters.area) params.set('area', newFilters.area);
+    if (newFilters.type) params.set('type', newFilters.type);
+    if (newFilters.status) params.set('status', newFilters.status);
+    if (newFilters.sort !== 'date_asc') params.set('sort', newFilters.sort);
+    if (newFilters.mine) params.set('mine', 'true');
+    setSearchParams(params, { replace: true });
+  };
   const { data, isLoading, isError, error } = useQuery({ queryKey: ['tasks', filters], queryFn: () => getTasks(filters), placeholderData: keepPreviousData })
   const { user } = useAuth();
   let content;

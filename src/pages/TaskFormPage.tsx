@@ -34,7 +34,9 @@ function TaskFormPage() {
     mutationFn: (values: TaskFormValues) => isEdit ? updateTask(id!, values) : createTask(values),
     onSuccess: (savedTask) => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
-      navigate(`/tasks/${savedTask.id}`);
+      navigate(`/tasks/${savedTask.id}`, {
+        state: { message: isEdit ? 'המשימה עודכנה בהצלחה' : 'המשימה נוספה בהצלחה' },
+      });
     },
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response?.data?.details) {
