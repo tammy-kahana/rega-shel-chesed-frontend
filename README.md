@@ -1,32 +1,63 @@
-# React + TypeScript + Vite
+# רגע של חסד - צד הלקוח (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+מערכת לניהול משימות התנדבות. רכזי התנדבויות מפרסמים משימות (ליווי חולה, חלוקת סלי מזון, עזרה לקשיש, הסעה), ומתנדבים מצטרפים אליהן.
 
-Currently, two official plugins are available:
+- **האתר:** https://rega-shel-chesed-frontend.onrender.com
+- **השרת:** https://rega-shel-chesed-api.onrender.com ([תיעוד API](https://rega-shel-chesed-api.onrender.com/api-docs))
+- **קוד השרת:** https://github.com/tammy-kahana/rega-shel-chesed-backend
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> השרת נמצא בחשבון חינמי ב-Render ונרדם אחרי 15 דקות בלי שימוש. הכניסה הראשונה יכולה לקחת עד דקה.
 
-## React Compiler
+## מה אפשר לעשות
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**כל משתמש מחובר**
+- הרשמה והתחברות
+- רשימת משימות עם חיפוש, סינון לפי אזור, סוג וסטטוס, ומיון לפי תאריך
+- מתג "המשימות שלי"
 
-## Expanding the Oxlint configuration
+**מתנדב/ת**
+- הצטרפות למשימה, ביטול הצטרפות, ודיווח "ביצעתי"
+- פרטים למתנדבים (כתובת ואיש קשר) מוצגים רק למי שהצטרף למשימה
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+**רכז/ת**
+- הוספת משימה ועריכת משימות שיצר/ה
+- סימון משימה כבוצעה
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+## טכנולוגיות
+
+| נושא | ספרייה |
+| --- | --- |
+| בנייה | Vite, React, TypeScript |
+| ניתוב | React Router |
+| פנייה לשרת | Axios, React Query |
+| טפסים וולידציה | React Hook Form, Yup |
+| משתמש מחובר | Context ו-Hook בשם useAuth |
+
+## מבנה התיקיות
+
+| תיקייה | תפקיד |
+| --- | --- |
+| `api` | חיבור לשרת, פונקציות הבקשה, וחילוץ הודעות שגיאה |
+| `types` | טיפוסי TypeScript לפי נושא |
+| `context` | המשתמש המחובר וה-Token |
+| `hooks` | `useAuth`, `useMeta` |
+| `routes` | `ProtectedRoute` - הגנה על מסכים לפי התחברות ותפקיד |
+| `schemas` | חוקי ולידציה של הטפסים (Yup) |
+| `components` | `Header`, `FormField`, `TaskCard`, `TaskFilters` |
+| `pages` | מסך לכל כתובת |
+
+## הרצה במחשב
+
+```bash
+npm install
+cp .env.example .env   # ולמלא את VITE_API_URL
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## חשבונות לבדיקה
+
+| תפקיד | טלפון |
+| --- | --- |
+| רכזת (מרים כהן) | 0501000001 |
+| מתנדב מאושר (יוסף לוי) | 0502000001 |
+| מתנדב ממתין לאישור (אברהם ישראלי) | 0502000002 |
