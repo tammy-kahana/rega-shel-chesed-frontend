@@ -9,7 +9,7 @@ interface TaskFiltersProps {
 function TaskFilters({ filters, onChange }: TaskFiltersProps) {
     const { data: meta } = useMeta();
     return (
-        <>
+        <div className="mb-6 grid gap-x-4 border border-gray-200 bg-white p-4 sm:grid-cols-2 lg:grid-cols-3">
             <FormField label="חיפוש" id="search">
                 <input id="search" type="search" value={filters.search} onChange={e => onChange({ ...filters, search: e.target.value })} />
             </FormField>
@@ -33,10 +33,10 @@ function TaskFilters({ filters, onChange }: TaskFiltersProps) {
                     {meta?.sortOptions.map(sort => <option key={sort.value} value={sort.value}>{sort.label}</option>)}
                 </select>
             </FormField>
-            <label>
-                <input type="checkbox" checked={filters.mine} onChange={e => onChange({ ...filters, mine: e.target.checked })} />המשימות שלי
+            <label className="flex items-center gap-2 self-center">
+                <input className="size-4 accent-brand-600" type="checkbox" checked={filters.mine} onChange={e => onChange({ ...filters, mine: e.target.checked })} />המשימות שלי
             </label>
-        </>
+        </div>
     )
 }
 

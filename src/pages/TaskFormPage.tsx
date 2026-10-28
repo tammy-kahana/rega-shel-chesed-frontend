@@ -48,10 +48,10 @@ function TaskFormPage() {
     mutation.mutate(values);
   };
   if (isEdit && isLoading) {
-    return <p>טוען משימה...</p>
+    return <p className="text-gray-500">טוען משימה...</p>
   }
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-2xl border border-gray-200 bg-white p-8">
       <h2>{isEdit ? "עריכת משימה" : "משימה חדשה"}</h2>
       <FormField label="כותרת" id="title" error={errors.title?.message}>
         <input id="title" {...register('title')} />
@@ -87,8 +87,8 @@ function TaskFormPage() {
       <FormField label="פרטים למתנדבים" id="privateDetails" error={errors.privateDetails?.message}>
         <textarea id="privateDetails" {...register('privateDetails')} />
       </FormField>
-      {mutation.isError && <p> {getErrorMessage(mutation.error)}</p>}
-      <button type="submit" disabled={mutation.isPending}>
+      {mutation.isError && <p className="mb-4 border-s-4 border-red-600 bg-red-50 p-3 text-sm text-red-700">{getErrorMessage(mutation.error)}</p>}
+      <button className="w-full" type="submit" disabled={mutation.isPending}>
         {mutation.isPending ? 'שומר...' : 'שמירה'}
       </button>
     </form>

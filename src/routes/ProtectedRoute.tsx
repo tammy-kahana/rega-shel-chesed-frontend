@@ -12,7 +12,7 @@ function ProtectedRoute({ children, role }: ProtectedRouteProps) {
 
     const { user, isLoading } = useAuth();
     if (isLoading) {
-        return <p>טוען...</p>
+        return <p className="text-gray-500">טוען...</p>
     }
     if (!user) {
         return <Navigate to="/login" replace />

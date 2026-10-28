@@ -28,18 +28,18 @@ function LoginPage() {
         }
     }
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <h2>התחברות</h2>
+        <form onSubmit={handleSubmit(onSubmit)} className="mx-auto mt-8 max-w-md border border-gray-200 bg-white p-8">
+            <h2 className="text-center">התחברות</h2>
             <FormField label='טלפון' id='phone' error={errors.phone?.message}>
                 <input id="phone" type="tel" placeholder='0501234567' {...register('phone')} />
             </FormField>
             <FormField label='סיסמה' id='password' error={errors.password?.message}>
                 <input id="password" type="password" {...register('password')} />
             </FormField>
-            {serverError && <p>{serverError}</p>}
-            <button type="submit" disabled={isSubmitting} >{isSubmitting ? "מתחבר..." : "התחברות"}</button>
+            {serverError && <p className="mb-4 border-s-4 border-red-600 bg-red-50 p-3 text-sm text-red-700">{serverError}</p>}
+            <button className="w-full" type="submit" disabled={isSubmitting} >{isSubmitting ? "מתחבר..." : "התחברות"}</button>
 
-            <Link to="/register">אין לך חשבון? להרשמה</Link>
+            <Link to="/register" className="mt-4 block text-center text-sm">אין לך חשבון? להרשמה</Link>
         </form>
     )
 }

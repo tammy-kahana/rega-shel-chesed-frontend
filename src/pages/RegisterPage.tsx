@@ -26,8 +26,8 @@ function RegisterPage() {
     }
   }
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>הרשמה</h2>
+    <form onSubmit={handleSubmit(onSubmit)} className="mx-auto mt-8 max-w-md border border-gray-200 bg-white p-8">
+      <h2 className="text-center">הרשמה</h2>
       <FormField label='שם מלא' id='fullName' error={errors.fullName?.message}>
         <input id="fullName" type="text" {...register('fullName')} />
       </FormField>
@@ -37,9 +37,9 @@ function RegisterPage() {
       <FormField label='סיסמה' id='password' error={errors.password?.message}>
         <input id="password" type="password" {...register('password')} />
       </FormField>
-      {serverError && <p>{serverError}</p>}
-      <button type="submit" disabled={isSubmitting} >{isSubmitting ? "נרשם..." : "הרשמה"}</button>
-      <Link to="/login">כבר רשום? להתחברות</Link>
+      {serverError && <p className="mb-4 border-s-4 border-red-600 bg-red-50 p-3 text-sm text-red-700">{serverError}</p>}
+      <button className="w-full" type="submit" disabled={isSubmitting} >{isSubmitting ? "נרשם..." : "הרשמה"}</button>
+      <Link to="/login" className="mt-4 block text-center text-sm">כבר רשום? להתחברות</Link>
     </form>
   )
 }

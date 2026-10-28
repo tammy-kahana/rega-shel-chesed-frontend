@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+/*
+  הצבעים של האתר - מוגדרים כאן בלבד.
+  brand = הצבע הראשי (כחול נייבי), accent = צבע ההדגשה (כתום).
+  כדי להחליף צבע בכל האתר, מספיק לשנות את הערכים בשורות האלה.
+*/
+@theme {
+  --color-brand-50: #eef2f7;
+  --color-brand-100: #d6e0eb;
+  --color-brand-600: #2b4c76;
+  --color-brand-700: #1e3a5f;
+  --color-brand-800: #172e4b;
+  --color-brand-900: #10223a;
+
+  --color-accent-50: #fdf3ea;
+  --color-accent-100: #fae1cb;
+  --color-accent-200: #f5c9a3;
+  --color-accent-600: #e07a2f;
+  --color-accent-700: #c2641f;
+  --color-accent-800: #9a4e17;
+
+  --color-page: #f4f4f2;
+  --font-sans: "Assistant", system-ui, sans-serif;
+}
+
+/* עיצוב בסיסי לאלמנטים שחוזרים בכל האתר */
+@layer base {
+  html {
+    font-size: 18px;
+  }
+  body {
+    @apply min-h-screen bg-page font-sans text-gray-900;
+  }
+  h2 {
+    @apply mb-6 text-2xl font-bold text-gray-900;
+  }
+  h3 {
+    @apply text-lg font-bold text-gray-900;
+  }
+  a {
+    @apply text-brand-700 underline-offset-4 hover:underline;
+  }
+  label {
+    @apply mb-1 block text-sm font-semibold text-gray-700;
+  }
+  input:not([type="checkbox"]),
+  select,
+  textarea {
+    @apply w-full rounded-sm border border-gray-300 bg-white px-3 py-2 outline-none focus:border-brand-700 focus:ring-1 focus:ring-brand-700;
+  }
+  textarea {
+    @apply min-h-24;
+  }
+  button {
+    @apply cursor-pointer rounded-sm bg-brand-700 px-4 py-2 font-semibold text-white transition hover:bg-brand-800 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+}
+
+/* הקישור של העמוד הנוכחי בסרגל העליון (NavLink מוסיף לו את המחלקה active) */
+header a.active {
+  border-color: var(--color-accent-600);
+}

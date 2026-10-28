@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import TasksPage from "./pages/TasksPage";
@@ -8,6 +8,7 @@ import VolunteersPage from "./pages/VolunteersPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Header from "./components/Header";
+import HomePage from "./pages/HomePage";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
   return (
     <>
       <Header />
+      <main className="mx-auto max-w-5xl px-4 py-10">
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
@@ -23,9 +25,10 @@ function App() {
         <Route path="/tasks/new" element={<ProtectedRoute role="COORDINATOR"><TaskFormPage key="new"/></ProtectedRoute>} />
         <Route path="/tasks/:id/edit" element={<ProtectedRoute role="COORDINATOR"><TaskFormPage key="edit"/></ProtectedRoute>} />
         <Route path="/volunteers" element={<ProtectedRoute role="COORDINATOR"><VolunteersPage /></ProtectedRoute>} />
-        <Route path="/" element={<Navigate to="/tasks" replace />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      </main>
     </>
   )
 }

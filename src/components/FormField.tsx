@@ -9,10 +9,10 @@ interface FormFieldProps {
 function FormField({ label, id, error, children }: FormFieldProps) {
 
     return (
-        <div>
+        <div className="mb-4">
             <label htmlFor={id}>{label}</label>
             {children}
-            {error && <p>{error}</p>}
+            {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
         </div>
     )
 }

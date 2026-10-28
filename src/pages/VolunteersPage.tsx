@@ -18,14 +18,14 @@ function VolunteersPage() {
   })
   let content;
   if (isLoading) {
-    content = <p>טוען מתנדבים...</p>
+    content = <p className="text-gray-500">טוען מתנדבים...</p>
   } else if (isError) {
-    content = <p>{getErrorMessage(error)}</p>
+    content = <p className="text-red-600">{getErrorMessage(error)}</p>
   } else if (!data || data.length === 0) {
-    content = <p>אין מתנדבים להצגה</p>
+    content = <p className="text-gray-500">אין מתנדבים להצגה</p>
   } else {
-    content = (<ul>
-      {data.map(volunteer => <li key={volunteer.id}>
+    content = (<ul className="space-y-3">
+      {data.map(volunteer => <li key={volunteer.id} className="flex flex-wrap items-center gap-3 border border-gray-200 bg-white p-5 [&>button:first-of-type]:ms-auto">
         {volunteer.fullName}, {volunteer.phone}, {volunteer.statusLabel}, פעיל/ה ב-{volunteer.activeSignupsCount} משימות
         {volunteer.status !== 'APPROVED' && (
           <button onClick={() => mutation.mutate({ id: volunteer.id, action: 'approve' })} disabled={mutation.isPending}>
@@ -33,12 +33,12 @@ function VolunteersPage() {
           </button>
         )}
         {volunteer.status !== 'REJECTED' && (
-          <button onClick={() => mutation.mutate({ id: volunteer.id, action: 'reject' })} disabled={mutation.isPending}>
+          <button className="bg-red-600 hover:bg-red-700" onClick={() => mutation.mutate({ id: volunteer.id, action: 'reject' })} disabled={mutation.isPending}>
             דחייה
           </button>
         )}
         {volunteer.status === 'APPROVED' && (
-          <button onClick={() => mutation.mutate({ id: volunteer.id, action: 'promote' })} disabled={mutation.isPending}>
+          <button className="bg-accent-600 hover:bg-accent-700" onClick={() => mutation.mutate({ id: volunteer.id, action: 'promote' })} disabled={mutation.isPending}>
             קידום לרכז/ת
           </button>
         )}
@@ -49,11 +49,11 @@ function VolunteersPage() {
     <>
       <h2>ניהול מתנדבים</h2>
       <FormField label="סטטוס" id="status">
-        <select id="status" value={status} onChange={e => setStatus(e.target.value)}>
+        <select className="sm:w-64" id="status" value={status} onChange={e => setStatus(e.target.value)}>
           <option value="">כל המתנדבים</option>{meta?.userStatuses.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
         </select>
       </FormField>
-      {mutation.isError && <p>{getErrorMessage(mutation.error)}</p>}
+      {mutation.isError && <p className="mb-4 text-red-600">{getErrorMessage(mutation.error)}</p>}
       {content}
     </>
   )
