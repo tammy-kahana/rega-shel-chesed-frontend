@@ -1,5 +1,6 @@
 export type Role = "COORDINATOR" | "VOLUNTEER";
 export type UserStatus = "PENDING" | "APPROVED" | "REJECTED";
+export type VolunteerAction = "approve" | "promote" | "reject"
 
 export interface User {
     id: number;
@@ -12,7 +13,11 @@ export interface User {
     createdAt: string;
 }
 
-export interface AuthResponse{
-    token:string;
-    user:User;
+export interface AuthResponse {
+    token: string;
+    user: User;
+}
+
+export interface Volunteer extends User {
+    activeSignupsCount: number;
 }
