@@ -8,7 +8,6 @@ import TaskFilters from "../components/TaskFilters"
 import { useAuth } from "../hooks/useAuth"
 
 function TasksPage() {
-  // הסינון נשמר בכתובת (למשל /tasks?area=ELAD), ולכן הוא נשאר גם בחזרה מדף משימה וגם ברענון
   const [searchParams, setSearchParams] = useSearchParams();
   const filters: TaskFilterValues = {
     search: searchParams.get('search') ?? '',

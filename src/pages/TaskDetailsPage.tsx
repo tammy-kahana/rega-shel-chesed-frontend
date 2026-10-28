@@ -8,7 +8,6 @@ import { formatDate } from "../utils/formatDate";
 function TaskDetailsPage() {
   const { id } = useParams();
   const location = useLocation();
-  // הודעה שנשלחה מטופס המשימה אחרי שמירה (אם הגענו מהרשימה - אין הודעה)
   const successMessage = (location.state as { message?: string } | null)?.message;
   const { data, isLoading, isError, error } = useQuery({ queryKey: ['tasks', id], queryFn: () => getTask(id!) })
   const queryClient = useQueryClient();

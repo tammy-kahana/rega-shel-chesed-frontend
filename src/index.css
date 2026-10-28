@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-/*
-  הצבעים של האתר - מוגדרים כאן בלבד.
-  brand = הצבע הראשי (כחול נייבי), accent = צבע ההדגשה (כתום).
-  כדי להחליף צבע בכל האתר, מספיק לשנות את הערכים בשורות האלה.
-*/
 @theme {
   --color-brand-50: #eef2f7;
   --color-brand-100: #d6e0eb;
@@ -24,7 +19,6 @@
   --font-sans: "Assistant", system-ui, sans-serif;
 }
 
-/* עיצוב בסיסי לאלמנטים שחוזרים בכל האתר */
 @layer base {
   html {
     font-size: 18px;
@@ -57,7 +51,6 @@
   }
 }
 
-/* הקישור של העמוד הנוכחי בסרגל העליון (NavLink מוסיף לו את המחלקה active) */
 header a.active {
   border-color: var(--color-accent-600);
 }

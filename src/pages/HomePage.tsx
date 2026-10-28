@@ -1,7 +1,6 @@
 import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
-// הטקסטים של הדף נשמרים במערכים, ומוצגים עם map - כך לא כותבים את אותו JSX כמה פעמים
 const steps = [
   { title: 'נרשמים', text: 'יוצרים חשבון, ורכז/ת ההתנדבויות מאשר/ת אותו.' },
   { title: 'בוחרים משימה', text: 'ליווי חולה, חלוקת סלי מזון, עזרה לקשיש או הסעה, באזור שלך.' },
@@ -24,7 +23,6 @@ const benefits = [
 
 function HomePage() {
   const { user } = useAuth();
-  // משתמש מחובר לא צריך את דף ההסבר - עובר ישר לרשימת המשימות
   if (user) {
     return <Navigate to="/tasks" replace />
   }
